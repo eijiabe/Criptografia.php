@@ -1,0 +1,70 @@
+🔥 Método 1: Rodando direto com PHP no Windows (sem instalar nada extra)
+Se tu já tem o PHP instalado no PC, faz assim:
+
+1️⃣ Abre o Prompt de Comando (CMD)
+Pressiona Win + R, digita cmd, e dá Enter.
+
+2️⃣ Vai até a pasta onde tá o script
+No CMD, navega até onde salvou o .php usando cd:
+
+sh
+Copiar
+Editar
+cd C:\Users\SeuUsuario\Desktop\meuscript
+3️⃣ Roda o script
+Se tem PHP instalado e configurado no PATH, só digitar:
+
+sh
+Copiar
+Editar
+php meu_script.php
+Se não tiver no PATH, usa o caminho completo do executável:
+
+sh
+Copiar
+Editar
+C:\xampp\php\php.exe meu_script.php
+(Se estiver usando XAMPP)
+
+🔥 Método 2: Criando um Arquivo .bat (Automático)
+Se quiser executar com um clique, faz isso:
+
+1️⃣ Cria um arquivo .bat
+Abre o Bloco de Notas e cola isso:
+
+bat
+Copiar
+Editar
+@echo off
+php "C:\caminho\para\meu_script.php"
+pause
+Salva como rodar_script.bat (não esquece de colocar "Todos os arquivos" no tipo de salvamento).
+
+2️⃣ Dá um duplo clique no .bat
+Pronto, ele roda o script e mantém a janela aberta pra tu ver o que rolou.
+
+🔥 Método 3: Agendando no Windows (Automático e Recorrente)
+Se quiser rodar isso automaticamente em horários específicos, faz assim:
+
+1️⃣ Abre o Agendador de Tarefas
+Pressiona Win + R, digita taskschd.msc, e dá Enter.
+
+2️⃣ Cria uma nova tarefa
+Clica em "Criar Tarefa"
+
+Na aba "Gatilho", define o horário (ex: todo dia às 3h da manhã)
+
+Na aba "Ações", clica em "Nova..." e escolhe:
+
+Programa/script: php.exe
+
+Argumentos: C:\caminho\para\meu_script.php
+
+Salva e pronto!
+
+Conclusão
+Se quer rodar manualmente, usa o Método 1 (CMD).
+
+Se quer com um clique, usa o Método 2 (.bat).
+
+Se quer rodar automaticamente todo dia, usa o Método 3 (Agendador).
