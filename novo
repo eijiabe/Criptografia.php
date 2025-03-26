@@ -1,0 +1,48 @@
+<?php
+
+// Define o caminho do diretório
+$folder = '/path/to/folder';
+$key = 'MySuperSecretKey123'; // Chave de criptografia (tem que ter 16, 24 ou 32 caracteres)
+$method = 'AES-256-CBC'; // Algoritmo seguro
+
+// Função para criptografar um arquivo
+function encrypt_file($file, $key, $method) {
+    $plaintext = file_get_contents($file);
+    $iv_size = openssl_cipher_iv_length($method);
+    $iv = openssl_random_pseudo_bytes($iv_size);
+
+    // Criptografa o arquivo
+    $ciphertext = openssl_encrypt($plaintext, $method, $key, 0, $iv);
+
+    // Salva o IV junto com o conteúdo criptografado
+    file_put_contents($file . '.enc', $iv . $ciphertext);
+
+    // Remove o arquivo original
+    unlink($file);
+}
+
+// Função para percorrer o diretório recursivamente e criptografar os arquivos
+function encrypt_folder_recursive($folder, $key, $method) {
+    $files = scandir($folder);
+
+    foreach ($files as $file) {
+        if ($file == '.' || $file == '..') {
+            continue;
+        }
+
+        $path = $folder . '/' . $file;
+
+        if (is_file($path)) {
+            encrypt_file($path, $key, $method);
+        } elseif (is_dir($path)) {
+            encrypt_folder_recursive($path, $key, $method);
+        }
+    }
+}
+
+// Inicia a criptografia no diretório inteiro
+encrypt_folder_recursive($folder, $key, $method);
+
+echo "Criptografia concluída!";
+
+?>
